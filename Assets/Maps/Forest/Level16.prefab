@@ -2022,7 +2022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 851459373373352233, guid: df62348ec3d064846a32c5305da83707, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6414147892963138222, guid: df62348ec3d064846a32c5305da83707, type: 3}
       propertyPath: count
@@ -2521,6 +2521,10 @@ PrefabInstance:
     - target: {fileID: 666501018493144383, guid: 55e2b1b5cda890744b8422f63439dddc, type: 3}
       propertyPath: m_Name
       value: Fence (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8222962835011811860, guid: 55e2b1b5cda890744b8422f63439dddc, type: 3}
+      propertyPath: m_Size.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3643,6 +3647,10 @@ PrefabInstance:
     - target: {fileID: 666501018493144383, guid: 55e2b1b5cda890744b8422f63439dddc, type: 3}
       propertyPath: m_Name
       value: Fence (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8222962835011811860, guid: 55e2b1b5cda890744b8422f63439dddc, type: 3}
+      propertyPath: m_Size.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

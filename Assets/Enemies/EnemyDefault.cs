@@ -42,8 +42,7 @@ public class EnemyDefault : MonoBehaviour
     IEnumerator delay(int time)
     {
         yield return new WaitForSeconds(time);
-        if (++nodeNumber == defaultPath.Length)
-            nodeNumber = 0;
+        nodeNumber = ++nodeNumber == defaultPath.Length ? 0 : nodeNumber;
         if (defaultPath.Length != 1)
             anim.SetBool("Moving", true);
         nva.SetDestination(defaultPath[nodeNumber]);

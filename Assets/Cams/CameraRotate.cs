@@ -30,9 +30,7 @@ public class CameraRotate : MonoBehaviour
     IEnumerator waitTime()
     {
         yield return new WaitForSeconds(waitTimes[nodeNumber]);
-        nodeNumber++;
-        if (nodeNumber == directions.Length)
-            nodeNumber = 0;
+        nodeNumber = ++nodeNumber == directions.Length ? 0 : nodeNumber;
         isWaiting = false;
         StartCoroutine(turnTime());
     }

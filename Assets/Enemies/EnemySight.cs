@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 public class EnemySight : MonoBehaviour
 {
+    [SerializeField] private LevelData levelData;
     private string gameMode;
     private LayerMask playerMask, wallMask;
     [SerializeField] private float viewRadius;
@@ -14,6 +14,7 @@ public class EnemySight : MonoBehaviour
     private EnemyPlayerSpotted eps;
     private Mesh viewMesh;
     [SerializeField] private Material berserkMat, stealthMat;
+    [SerializeField] private PowerupData pud;
     private void Awake()
     {
         playerMask = LayerMask.GetMask("Player");
@@ -21,9 +22,7 @@ public class EnemySight : MonoBehaviour
         ec = GetComponent<EnemyChase>();
         ed = GetComponent<EnemyDefault>();
         eps = GetComponent<EnemyPlayerSpotted>();
-        StreamReader r = new StreamReader("currentlevel.txt");
-        int levelNumber = int.Parse(r.ReadLine());
-        r.Close();
+        int levelNumber = levelData.currentLevel;
         if (levelNumber % 8 <= 4 && levelNumber % 8 >= 1)
         {
             gameMode = "Berserk";
@@ -43,7 +42,7 @@ public class EnemySight : MonoBehaviour
     }
     private void Update()
     {
-        Collider[] playerInRadius = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
+        Collider[] playerInRadius = Physics.OverlapSphere(transform.position, viewRadius / pud.enemyRadiusDecrease, playerMask);
         if (playerInRadius.Length == 1)
         {
             Transform playerTransform = playerInRadius[0].transform;
@@ -105,9 +104,9 @@ public class EnemySight : MonoBehaviour
         Vector3 dir = new Vector3(Mathf.Sin(globalAngle * Mathf.Deg2Rad), 0,
             Mathf.Cos(globalAngle * Mathf.Deg2Rad));
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, dir, out hit, viewRadius, wallMask))
+        if (Physics.Raycast(transform.position, dir, out hit, viewRadius / pud.enemyRadiusDecrease, wallMask))
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
-        return new ViewCastInfo(false, transform.position + dir * viewRadius, viewRadius, globalAngle);
+        return new ViewCastInfo(false, transform.position + dir * viewRadius / pud.enemyRadiusDecrease, viewRadius / pud.enemyRadiusDecrease, globalAngle);
     }
     private struct ViewCastInfo
     {

@@ -13,6 +13,51 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PowerupMenu",
+                    "type": "Button",
+                    "id": "cb6f014c-bba3-4ddf-915e-54cd77b738ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RadiusIncrease",
+                    "type": "Button",
+                    "id": "b0863315-0142-401b-9021-2b6f0f402d38",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AngleIncrease",
+                    "type": "Button",
+                    "id": "2b6a2907-c384-4dd2-89a9-3e2b9ca3dcb4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EnemyRadiusDecrease",
+                    "type": "Button",
+                    "id": "f00faa2b-cf06-45fe-9e20-adb92fc174bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "KnifeDamageIncrease",
+                    "type": "Button",
+                    "id": "c7435b94-adcf-4957-b5c7-56214c707d8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -125,6 +170,61 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "3b144846-c36a-40ba-a6e6-70cf67edebfb",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerupMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66819cc3-d0a9-4552-99f1-48a12179f205",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RadiusIncrease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "862dfd6a-80ff-4ded-9bdd-4195c6590f95",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AngleIncrease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef524097-4777-4c58-82ac-ad50d276fc58",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnemyRadiusDecrease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04c2dd45-fb73-4ab0-92e5-44265580a15b",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KnifeDamageIncrease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

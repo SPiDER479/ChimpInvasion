@@ -21,6 +21,9 @@ TagManager:
   - Key
   - Level
   - Joystick
+  - BronzeBanana
+  - SilverBanana
+  - GoldBanana
   layers:
   - Default
   - TransparentFX

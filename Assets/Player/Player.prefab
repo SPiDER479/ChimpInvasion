@@ -620,12 +620,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed6330185bfb4b4d91803b71560d047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMode: Berserk
+  levelData: {fileID: 0}
   playerSpeed: 10
-  running: {fileID: 4782011927912536069}
-  breakLock: {fileID: 4951279764402147907}
-  successPanel: {fileID: 0}
-  failPanel: {fileID: 0}
+  gameMode: Berserk
+  animalCount: 0
+  pud: {fileID: 0}
 --- !u!114 &3742367275239032367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,10 +637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b5bf91142559a4f83a198a4ef25879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 15
-  viewAngle: 45
   meshResolution: 1
   viewMeshFilter: {fileID: 1756402332479974123}
+  pud: {fileID: 0}
 --- !u!65 &2717525017125284328
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -704,6 +702,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9c43cb14-899e-4c01-b354-0b588e144902
     m_ActionName: 'Control/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cb6f014c-bba3-4ddf-915e-54cd77b738ef
+    m_ActionName: 'Control/PowerupMenu[/Keyboard/k]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0863315-0142-401b-9021-2b6f0f402d38
+    m_ActionName: 'Control/RadiusIncrease[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2b6a2907-c384-4dd2-89a9-3e2b9ca3dcb4
+    m_ActionName: 'Control/AngleIncrease[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f00faa2b-cf06-45fe-9e20-adb92fc174bf
+    m_ActionName: 'Control/EnemyRadiusDecrease[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7435b94-adcf-4957-b5c7-56214c707d8d
+    m_ActionName: 'Control/KnifeDamageIncrease[/Keyboard/4]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Control
@@ -1036,7 +1054,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4992758198669102562}
-  - component: {fileID: 1148682066818756815}
   - component: {fileID: 8317233869622344689}
   m_Layer: 11
   m_Name: Body
@@ -1065,37 +1082,6 @@ Transform:
   - {fileID: 2456458111662058980}
   m_Father: {fileID: 6368135660148308886}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &1148682066818756815
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6182162820492919152}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: 0.3992514, z: -0.044929445}
-  m_Size: 1.2387309
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.95
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 5656757442522119580}
-  - screenRelativeHeight: 0.7
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 4990372448307651915}
-  - screenRelativeHeight: 0.35
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 4489511534093283919}
-  - screenRelativeHeight: 0.05
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2440281965448769000}
-  m_Enabled: 1
 --- !u!95 &8317233869622344689
 Animator:
   serializedVersion: 7

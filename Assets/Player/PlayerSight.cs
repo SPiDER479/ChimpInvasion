@@ -4,12 +4,11 @@ using UnityEngine;
 public class PlayerSight : MonoBehaviour
 {
     private LayerMask enemyMask, wallMask;
-    public float viewRadius;
-    [SerializeField] [Range(0, 360)] private float viewAngle;
     public float meshResolution;
     [SerializeField] private MeshFilter viewMeshFilter;
     private Mesh viewMesh;
     private bool knifeThrown;
+    [SerializeField] private PowerupData pud;
     private void OnEnable()
     {
         enemyMask = LayerMask.GetMask("Enemy");
@@ -21,12 +20,12 @@ public class PlayerSight : MonoBehaviour
     }
     private void Update()
     {
-        Collider[] targetInRadius = Physics.OverlapSphere(transform.position, viewRadius, enemyMask);
+        Collider[] targetInRadius = Physics.OverlapSphere(transform.position, pud.radius, enemyMask);
         foreach (Collider target in targetInRadius)
         {
             Transform targetTransform = target.transform;
             Vector3 dirToTarget = (targetTransform.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
+            if (Vector3.Angle(transform.forward, dirToTarget) < pud.angle / 2)
             {
                 float distToTarget = Vector3.Distance(transform.position, targetTransform.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask) && !knifeThrown)
@@ -46,12 +45,12 @@ public class PlayerSight : MonoBehaviour
     }
     private void LateUpdate()
     {
-        int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
-        float stepAngleSize = viewAngle / stepCount;
+        int stepCount = Mathf.RoundToInt(pud.angle * meshResolution);
+        float stepAngleSize = pud.angle / stepCount;
         List<Vector3> viewPoints = new List<Vector3>();
         for (int i = 0; i <= stepCount; i++)
         {
-            float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
+            float angle = transform.eulerAngles.y - pud.angle / 2 + stepAngleSize * i;
             ViewCastInfo newViewCast = ViewCast(angle);
             viewPoints.Add(newViewCast.point);
         }
@@ -84,9 +83,9 @@ public class PlayerSight : MonoBehaviour
         Vector3 dir = new Vector3(Mathf.Sin(globalAngle * Mathf.Deg2Rad), 0,
             Mathf.Cos(globalAngle * Mathf.Deg2Rad));
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, dir, out hit, viewRadius, wallMask))
+        if (Physics.Raycast(transform.position, dir, out hit, pud.radius, wallMask))
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
-        return new ViewCastInfo(false, transform.position + dir * viewRadius, viewRadius, globalAngle);
+        return new ViewCastInfo(false, transform.position + dir * pud.radius, pud.radius, globalAngle);
     }
     private struct ViewCastInfo
     {

@@ -275,12 +275,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bd2a2272b6c304b8d9f8e67b5257cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: f92142e51e3a0214682c0cc56dafee68, type: 2}
   viewRadius: 20
   viewAngle: 45
   meshResolution: 1
   viewMeshFilter: {fileID: 1172892704063341894}
   berserkMat: {fileID: 2100000, guid: 1a93817674c33d84997aa1a1ebc97e44, type: 2}
   stealthMat: {fileID: 2100000, guid: 66cfe04054134f34c91b622aa5350652, type: 2}
+  pud: {fileID: 11400000, guid: 8b1303af9cfeecf4e83cda0995b981a5, type: 2}
 --- !u!114 &2693162727466649596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  pud: {fileID: 11400000, guid: 8b1303af9cfeecf4e83cda0995b981a5, type: 2}
 --- !u!65 &6481920859036690476
 BoxCollider:
   m_ObjectHideFlags: 0

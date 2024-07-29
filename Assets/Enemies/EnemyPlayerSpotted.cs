@@ -39,8 +39,8 @@ public class EnemyPlayerSpotted : MonoBehaviour
             {
                 turretingOn = true;
                 StartCoroutine(changeRotationDirection());
+                StartCoroutine(wait());
             }
-            StartCoroutine(wait());
         }
     }
     IEnumerator wait()
@@ -52,12 +52,18 @@ public class EnemyPlayerSpotted : MonoBehaviour
     IEnumerator changeRotationDirection()
     {
         yield return new WaitForSeconds(2);
-        if (rotateDirection == 0)
-            rotateDirection = 20;
-        else if (rotateDirection == 20)
-            rotateDirection = -20;
-        else if (rotateDirection == -20)
-            rotateDirection = 0;
+        switch (rotateDirection)
+        {
+            case 0:
+                rotateDirection = 20;
+                break;
+            case 20:
+                rotateDirection = -20;
+                break;
+            case -20:
+                rotateDirection = 0;
+                break;
+        }
         StartCoroutine(changeRotationDirection());
     }
     private void OnDisable()

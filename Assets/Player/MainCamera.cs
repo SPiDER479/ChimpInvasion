@@ -6,21 +6,20 @@ using Random = UnityEngine.Random;
 public class MainCamera : MonoBehaviour
 {
     private GameObject player;
-    private CinemachineFreeLook cfl;
+    private CinemachineVirtualCamera cvc;
     private CinemachineCameraOffset cco;
     private void Start()
     {
         player = GameObject.Find("Player");
-        cfl = GetComponent<CinemachineFreeLook>();
+        cvc = GetComponent<CinemachineVirtualCamera>();
         cco = GetComponent<CinemachineCameraOffset>();
         setup();
     }
     public void setup()
     {
-        cfl.LookAt = player.transform;
-        cfl.Follow = player.transform;
-        cfl.m_Orbits[1].m_Radius = 20;
-        cfl.m_Orbits[1].m_Height = 150;
+        cvc.LookAt = player.transform;
+        cvc.Follow = player.transform;
+        cco.m_Offset = new Vector3(0, 100, 0);
         StartCoroutine(wait());
     }
     IEnumerator wait()
@@ -31,20 +30,18 @@ public class MainCamera : MonoBehaviour
     IEnumerator setCam()
     {
         yield return new WaitForSeconds(0.01f);
-        if (cfl.m_Orbits[1].m_Height > 100)
+        if (cco.m_Offset.y > 70)
         {
-            cfl.m_Orbits[1].m_Height -= 0.5f;
+            cco.m_Offset.y -= 0.5f;
             StartCoroutine(setCam());
         }
     }
     public void enemyKill(Transform enemy)
     {
         Time.timeScale = 0.1f;
-        cfl.LookAt = enemy;
-        cfl.Follow = enemy;
-        cfl.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
-        cfl.m_Orbits[1].m_Radius = 10;
-        cfl.m_Orbits[1].m_Height = 20;
+        cvc.LookAt = enemy;
+        cvc.Follow = enemy;
+        cco.m_Offset.y = 20;
         StartCoroutine(slowMotion());
         StartCoroutine(spin(Random.Range(0, 2)));
     }
@@ -52,12 +49,9 @@ public class MainCamera : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         Time.timeScale = 1;
-        cfl.LookAt = player.transform;
-        cfl.Follow = player.transform;
-        cfl.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
-        cfl.m_Orbits[1].m_Radius = 20;
-        cfl.m_Orbits[1].m_Height = 100;
-        cco.m_Offset = Vector3.zero;
+        cvc.LookAt = player.transform;
+        cvc.Follow = player.transform;
+        cco.m_Offset = new Vector3(0, 70, 0);
         StopAllCoroutines();
     }
     IEnumerator spin(int direction)

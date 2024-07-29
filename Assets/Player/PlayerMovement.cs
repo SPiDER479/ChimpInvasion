@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
-using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private LevelData levelData;
     [SerializeField] private int playerSpeed;
     public string gameMode;
     public int animalCount;
@@ -12,8 +13,11 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private LayerMask enemyMask;
     private AudioSource breakLock, running;
+    [SerializeField] private Image UIBG;
+    [SerializeField] private Sprite[] UIBGSprites;
     private GameObject successPanel, failPanel, loadingPanel, joystick;
     private int levelNumber;
+    [SerializeField] private PowerupData pud;
     private void Start()
     {
         joystick = GameObject.FindGameObjectWithTag("Joystick");
@@ -26,14 +30,15 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = 0;
         verticalMovement = 0;
         anim = GetComponentInChildren<Animator>();
-        StreamReader r = new StreamReader("currentlevel.txt");
-        levelNumber = int.Parse(r.ReadLine());
-        r.Close();
-        setup(0);
+        setup();
     }
-    public void setup(int change)
+    public void setup()
     {
-        levelNumber += change;
+        pud.radius = 10;
+        pud.angle = 45;
+        pud.enemyRadiusDecrease = 1;
+        pud.knifeDamageMultiplier = 1;
+        levelNumber = levelData.currentLevel;
         if (levelNumber % 8 <= 4 && levelNumber % 8 >= 1)
             gameMode = "Berserk";
         else
@@ -42,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(0, 0.5f, -15);
         transform.rotation = Quaternion.identity;
         loadingPanel.SetActive(true);
+        UIBG.gameObject.SetActive(false);
         successPanel.SetActive(false);
         failPanel.SetActive(false);
         joystick.SetActive(false);
@@ -80,28 +86,32 @@ public class PlayerMovement : MonoBehaviour
         switch (other.collider.tag)
         {
             case "Animal":
-            {
                 other.gameObject.GetComponent<Animal>().saved();
                 breakLock.Play();
                 animalCount--;
                 break;
-            }
             case "Enemy":
-            {
                 levelEnd(false);
                 break;
-            }
             case "Exit":
-            {
                 if (animalCount == 0)
                     levelEnd(true);
                 break;
-            }
             case "Key":
-            {
                 other.gameObject.SetActive(false);
                 break;
-            }
+            case "BronzeBanana":
+                other.gameObject.SetActive(false);
+                GetComponent<Powerups>().setBananaCount(1);
+                break;
+            case "SilverBanana":
+                other.gameObject.SetActive(false);
+                GetComponent<Powerups>().setBananaCount(2);
+                break;
+            case "GoldBanana":
+                other.gameObject.SetActive(false);
+                GetComponent<Powerups>().setBananaCount(3);
+                break;
         }
     }
     IEnumerator loading()
@@ -114,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
     {
         foreach (Collider enemy in Physics.OverlapSphere(transform.position, 1000, enemyMask))
             enemy.gameObject.SetActive(false);
+        UIBG.sprite = UIBGSprites[levelNumber / 16];
+        UIBG.gameObject.SetActive(true);
         successPanel.SetActive(success);
         failPanel.SetActive(!success);
         joystick.SetActive(false);
